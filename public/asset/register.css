@@ -61,4 +61,8 @@
 }
 #google{
     border: 2px solid black;
+    background-color: #DEE3E7;
+}
+.ggicon{
+    color: blue;
 }

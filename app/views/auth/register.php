@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.lineicons.com/4.0/lineicons.css" />
     <link rel="stylesheet" href="../../../public/asset/register.css">
 </head>
 <body>
@@ -26,7 +27,14 @@
                 <button type="submit">Create Account</button>
             </form>
             <p class="login">Already have an account? <a href="#">Log in</a></p>
-            <button id="google">Sign up with Google</button>
+            
+            <a href="login.php" class="social">
+                <button id="google">
+                    <i class="lni lni-google ggicon"></i>
+                    Sign up with Google   
+                </button>
+            </a>
+            
         </div>
     </div>
 </body>
