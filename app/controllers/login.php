@@ -22,17 +22,18 @@ class LoginController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = $_POST['email'] ?? '';
             $password = $_POST['password'] ?? '';
-
+            echo $email . $password;
             // Tìm người dùng theo email
             $user = $this->userModel->findByEmail($email); // Sửa biến
-
+            print_r($user);
             if ($user && $this->userModel->checkPassword($user['password'], $password)) {
                 // Đăng nhập thành công
-                $_SESSION['user_id'] = $user['id'];
+
+                $_SESSION['user_id'] = $user['user_id'];
                 $_SESSION['user_email'] = $user['email'];
 
                 // Chuyển hướng đến trang chính
-                header('Location: /WeTube_php/app/views/index.php');
+                 header('Location: /WeTube_php/app/views/index.php');
                 exit;
             } else {
                 // Đăng nhập thất bại
