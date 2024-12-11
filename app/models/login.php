@@ -1,7 +1,7 @@
 <?php
-include '../config/connect.php'; // Kết nối tới cơ sở dữ liệu
+require_once 'C:\xampp\htdocs\WeTube_php\app\config\connect.php'; // Kết nối tới cơ sở dữ liệu
 
-class Login
+class LoginModel
 {
     private $conn;
 
@@ -14,11 +14,18 @@ class Login
     {
         $query = "SELECT * FROM users WHERE email = ?";
         $stmt = mysqli_prepare($this->conn, $query);
+
+        if (!$stmt) {
+            die('Prepare failed: ' . mysqli_error($this->conn));
+        }
+
         mysqli_stmt_bind_param($stmt, "s", $email);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
 
-        return $result ? mysqli_fetch_assoc($result) : null;
+        $user = mysqli_fetch_assoc($result);
+        mysqli_stmt_close($stmt); // Close the statement
+        return $user ? $user : null;
     }
 
     public function checkPassword($hashedPassword, $password)
@@ -26,3 +33,4 @@ class Login
         return password_verify($password, $hashedPassword);
     }
 }
+?>
