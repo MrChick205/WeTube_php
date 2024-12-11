@@ -10,7 +10,8 @@
 <body>
     <div class="container">
         <div class="signup-form">   
-            <form action="" method="POST">
+            <!-- Chỉnh sửa action để trỏ tới controller -->
+            <form action="../../controller/register.php" method="POST">
                 <h2>Create your Free Account</h2>
                 <div class="form">
                     <p>Full Name</p>
