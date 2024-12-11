@@ -11,19 +11,19 @@
     <div class="container">
         <div class="signup-form">   
             <!-- Chỉnh sửa action để trỏ tới controller -->
-            <form action="../../controller/register.php" method="POST">
+            <form action="../../controllers/register.php" method="POST">
                 <h2>Create your Free Account</h2>
                 <div class="form">
                     <p>Full Name</p>
-                    <input type="text" name="fullname" placeholder="Enter your Full Name here" required>
+                    <input type="text" id="fullname" name="fullname" placeholder="Enter your Full Name here" required>
                 </div>
                 <div class="form">
                     <p>Email</p>
-                    <input type="email" name="email" placeholder="Enter your Email here" required>
+                    <input type="email" id="email" name="email" placeholder="Enter your Email here" required>
                 </div>
                 <div class="form">
                     <p>Password</p>
-                    <input type="password" name="password" placeholder="Enter your Password here" required>
+                    <input type="password" id="password" name="password" placeholder="Enter your Password here" required>
                 </div>
                 <button type="submit">Create Account</button>
             </form>

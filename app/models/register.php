@@ -1,10 +1,12 @@
 <?php
 
+require_once '../config/connect.php';
+
 class RegisterModel {
     private $db;
 
-    public function __construct($dbConnection) {
-        $this->db = $dbConnection; // $db là đối tượng kết nối MySQLi
+    public function __construct($connection) {
+        $this->db = $connection; // $conn là đối tượng kết nối MySQLi
     }
 
     // Phương thức này kiểm tra xem email có tồn tại hay chưa trước khi cho phép đăng ký tài khoản mới
@@ -44,7 +46,7 @@ class RegisterModel {
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
         // Chèn người dùng mới vào cơ sở dữ liệu
-        $sql = "INSERT INTO users (fullname, email, password, role) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO users (user_name, email, password, role) VALUES (?, ?, ?, ?)";
         $stmt = $this->db->prepare($sql);
         $stmt->bind_param("ssss", $fullname, $email, $hashedPassword, $role);
 
