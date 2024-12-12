@@ -2,7 +2,7 @@
 	// session_start();
 	$host = "localhost";
 	$user = "root";
-	$password = "";
+	$password = "Amie@301202";
 	$database = "wetube";
 
 	// Create connection
@@ -13,7 +13,7 @@
 	if (!$conn) {
     	die("Connection failed: " . mysqli_connect_error());
 	}else{
-        echo 'connect successful!';
+        // echo 'connect successful!';
     }
 
 ?>

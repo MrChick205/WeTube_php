@@ -59,7 +59,7 @@ body {
 
 @media (min-width: 1200px) {
 .container, .container-lg, .container-md, .container-sm, .container-xl {
-max-width: 1480px;
+max-width: 1180px;
     }
 }
 
@@ -95,7 +95,7 @@ span {
 #profile_info {
     background-color: #fff;
     width: 100%;
-    padding: 20px;
+    padding: 10px;
     border-radius: 8px;
 
 }
@@ -103,12 +103,12 @@ span {
     margin-bottom: 20px;
 }
 .img_upload {
-    width: 200px;
-    height:200px;
+    width: 180px;
+    height:180px;
     border: 2px dashed #ccc;
     border-radius: 50%;
     overflow: hidden; 
-    margin: 20px auto;
+    margin: 5px auto;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -116,13 +116,13 @@ span {
 
 .img_upload img {
     width: 100%;
-    height: auto;
+    height: 100%;
     border-radius: 50%;
 }
 
 .camera-icon {
     position: absolute; 
-    top: 250px;  
+    top: 230px;  
     right: 36%; 
     background-color: rgba(255, 255, 255, 0.7); 
     border-radius: 50%; 
@@ -134,24 +134,21 @@ span {
   margin-left:20%;
 }
 
-.mb-3 {
-    margin-bottom: 15px;
-}
 .mb-3 label {
-    font-size: 20px;
+    font-size: 16px;
     display: block;
     margin-bottom: 5px;
 }
 .mb-3 input {
-    font-size: 20px;
+    font-size: 16px;
     width: 75%;
-    padding: 10px;
+    /* padding: 1px; */
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
 .btn-update {
-    font-size: 20px;
+    font-size: 16px;
     background-color: #eeea04;
     color: rgb(0, 0, 0);
     padding: 10px 20px;
@@ -236,13 +233,11 @@ p {
 
         <form id="editForm" action="" method="POST" enctype="multipart/form-data" style="display: none;">
             <div class="img_upload">
-                <?php if (!empty($user['image'])): ?>
-                <img src="<?php echo htmlspecialchars($user['image']); ?>" alt="User Avatar" id="profileImage" name="user_img">
-                <?php endif; ?>
+                <img id = "img-user"  name="user_img" src="<?php echo htmlspecialchars($user['image']); ?>" alt="User Avatar" class="image-user">
                 <div class="camera-icon">
-                    <i class="fa fa-camera" aria-hidden="true" style="font-size:28px"></i>
+                    <i class="fa fa-camera" style="font-size:28px"></i>
                 </div>
-                <input type="file" name = "image" class="file-input" accept="image/*">
+                <input type="file" name = "image" class="file-input" accept="image/*" style="display: none;">
             </div>
             <hr>
             <div class="form_inf">
@@ -262,6 +257,9 @@ p {
                         <label for="password">Password</label>
                         <input type="password" id="password"  name="password" value="<?php echo htmlspecialchars($user['password']); ?>" class="form-control">
                     </div>
+                    <!-- <div class="mb-3">
+                        <input type="file" name = "image" class="file-input" accept="image/*">
+                    </div>  -->
             </div> 
             <button class="btn-update">Update Profile</button>
         </form> 
@@ -282,29 +280,6 @@ window.addEventListener('click', function(event) {
     }
 });
 
-const imgUpload = document.querySelector('.img_upload');
-    const fileInput = document.querySelector('.file-input');
-    const img = document.querySelector('#profileImage');
-
-
-    imgUpload .addEventListener('click', () => {
-    fileInput.click();
-    });
-    // Thay đổi ảnh khi user đổi
-    fileInput.addEventListener('change', (event) => {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-        img.src = e.target.result; // Thay đổi ảnh
-
-        };
-        reader.readAsDataURL(file);
-    
-
-    }
-    });
-
     function toggleEditForm() {
         const userProfile = document.getElementById('userProfile');
         const editForm = document.getElementById('editForm');
@@ -316,7 +291,30 @@ const imgUpload = document.querySelector('.img_upload');
             editForm.style.display = "none";
         }
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // const imgUpload = document.querySelector('.img_upload');
+        const fileInput = document.querySelector('.file-input');
+        const img = document.querySelector('#img-user');
+
+        document.querySelector('.camera-icon').addEventListener('click', () => {
+        fileInput.click(); // Kích hoạt file input
+        });
+
+        fileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    img.src = e.target.result; // Thay đổi ảnh
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    });
+
+
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
 </body>
 </html>
