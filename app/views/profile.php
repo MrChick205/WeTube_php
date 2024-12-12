@@ -3,7 +3,6 @@ session_start();
 require_once '../config/connect.php';
 require_once '../controllers/user.php';
 
-// Khởi tạo controller
 $userController = new UserController($conn);
 
 $userId = $_SESSION['user_id']; 
