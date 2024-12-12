@@ -72,7 +72,7 @@ max-width: 1180px;
     border-radius: 8px;
 }
 
-span {
+span, p {
     font-size: 20px;
 }
 
@@ -122,8 +122,8 @@ span {
 
 .camera-icon {
     position: absolute; 
-    top: 230px;  
-    right: 36%; 
+    top: 280px;  
+    right: 34%; 
     background-color: rgba(255, 255, 255, 0.7); 
     border-radius: 50%; 
     padding: 5px; 
@@ -142,12 +142,11 @@ span {
 .mb-3 input {
     font-size: 16px;
     width: 75%;
-    /* padding: 1px; */
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
-.btn-update {
+.btn-update, .btn-edit {
     font-size: 16px;
     background-color: #eeea04;
     color: rgb(0, 0, 0);
@@ -155,15 +154,22 @@ span {
     border: none;
     border-radius: 4px;
     cursor: pointer; 
-    margin-left:66%;
-}
-.btn-update:hover {
-    background-color: #218838;
 }
 
-p {
-    font-size: 20px;
+.btn-update {
+    margin-left:66%;
 }
+
+.btn-edit{
+    margin-left: 30%;
+    margin-top: 150px;
+}
+
+.btn-update:hover, .btn-edit:hover {
+    background-color:rgb(249, 153, 8);
+}
+
+
 </style>
 <body>
 
@@ -227,7 +233,7 @@ p {
                 <div class="mb-3">
                     <p><strong>Phone number:</strong><?php echo htmlspecialchars($user['phone']); ?></p>
                 </div>
-                <button id="editButton" class="btn-update" onclick="toggleEditForm()">Edit Profile</button>
+                <button id="editButton" class="btn-edit" onclick="toggleEditForm()">Edit Profile</button>
             </div>
         </div>
 
@@ -257,9 +263,6 @@ p {
                         <label for="password">Password</label>
                         <input type="password" id="password"  name="password" value="<?php echo htmlspecialchars($user['password']); ?>" class="form-control">
                     </div>
-                    <!-- <div class="mb-3">
-                        <input type="file" name = "image" class="file-input" accept="image/*">
-                    </div>  -->
             </div> 
             <button class="btn-update">Update Profile</button>
         </form> 
@@ -293,12 +296,11 @@ window.addEventListener('click', function(event) {
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-        // const imgUpload = document.querySelector('.img_upload');
         const fileInput = document.querySelector('.file-input');
         const img = document.querySelector('#img-user');
 
         document.querySelector('.camera-icon').addEventListener('click', () => {
-        fileInput.click(); // Kích hoạt file input
+        fileInput.click(); // 
         });
 
         fileInput.addEventListener('change', (event) => {
