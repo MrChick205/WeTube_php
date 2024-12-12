@@ -1,12 +1,12 @@
 <?php
+session_start();
 require_once '../config/connect.php';
 require_once '../controllers/user.php';
 
 // Khởi tạo controller
 $userController = new UserController($conn);
 
-// Giả sử ID người dùng được truyền qua URL (ví dụ: profile.php?id=1)
-$userId = $_GET['id'] ?? 1; // Mặc định là 1 nếu không có ID
+$userId = $_SESSION['user_id']; 
 
 // Lấy thông tin người dùng
 $user = $userController->getUserProfile($userId);
@@ -231,7 +231,7 @@ span, p {
                     <p><strong>Email:</strong><?php echo htmlspecialchars($user['email']); ?></p>
                 </div>
                 <div class="mb-3">
-                    <p><strong>Phone number:</strong><?php echo htmlspecialchars($user['phone']); ?></p>
+                    <p><strong>Birth:</strong><?php echo htmlspecialchars($user['birth']); ?></p>
                 </div>
                 <button id="editButton" class="btn-edit" onclick="toggleEditForm()">Edit Profile</button>
             </div>
@@ -256,8 +256,8 @@ span, p {
                         <input type="email" id="email"  name="email" value="<?php echo htmlspecialchars($user['email']); ?>" class="form-control">
                     </div>
                     <div class="mb-3">
-                        <label for="phone">Phone number</label>
-                        <input type="tel" id="phone"   name="phone"value="<?php echo htmlspecialchars($user['phone']); ?>" class="form-control">
+                        <label for="birth"></label>
+                        <input type="date" id="birth"   name="birth" value="<?php echo htmlspecialchars($user['birth']); ?>" class="form-control">
                     </div>
                     <div class="mb-3">
                         <label for="password">Password</label>
