@@ -15,7 +15,7 @@ class UserController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $userName = $_POST['user_name'] ?? '';
             $email = $_POST['email'] ?? '';
-            $phone = $_POST['phone'] ?? '';
+            $birth = $_POST['birth'] ?? '';
             $password = $_POST['password'] ?? '';
             $uploadDir = '../../public/uploads/';
             $user_img = '';
@@ -30,7 +30,7 @@ class UserController {
                 }
             }
 
-            return $this->userModel->updateUser($userId, $userName, $email, $phone, $password, $user_img);
+            return $this->userModel->updateUser($userId, $userName, $email, $birth, $password, $user_img);
         }
         return false;
     }
