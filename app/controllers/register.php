@@ -1,33 +1,49 @@
 <?php
 
-// Bao gồm kết nối cơ sở dữ liệu và RegisterModel
-//require_once '../config/connect.php'; // Kết nối cơ sở dữ liệu
-require_once '../models/register.php'; // Lớp xử lý đăng ký người dùng
+require_once('../models/register.php'); // Import file model
 
-// Kiểm tra xem form có được gửi đi bằng phương thức POST không
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Lấy dữ liệu người dùng từ form
-    $fullname = isset($_POST['fullname']) ? trim($_POST['fullname']) : ''; //trim(): Loại bỏ các khoảng trắng dư thừa từ đầu và cuối chuỗi.
-    $email = isset($_POST['email']) ? trim($_POST['email']) : '';
-    $password = isset($_POST['password']) ? trim($_POST['password']) : '';
-    $role = 'viewer';  // Mặc định vai trò là 'viewer', có thể thay đổi nếu muốn
+class RegisterController {
+    public function register() {
+        global $conn; // Lấy biến kết nối từ file connect.php
+        $error = '';
 
-    // Kiểm tra nếu có trường nào bị bỏ trống
-    if (empty($fullname) || empty($email) || empty($password)) {
-        echo "All fields are required!";
-        exit;
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $fullname = trim($_POST['fullname']);
+            $email = trim($_POST['email']);
+            $password = $_POST['password'];
+            
+            if (empty($fullname) || empty($email) || empty($password)) {
+                $error = "All fields are required!";
+            } else {
+                if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    $error = "Invalid email format!";
+                }
+            }
+
+            if (empty($error)) {
+                $registerModel = new RegisterModel($conn); // Truyền biến $conn vào model
+
+                $result = $registerModel->registerUser($fullname, $email, $password);
+
+                if ($result === true) {
+                    echo "<script>
+                            alert('Registered successfully!');
+                            window.location.href = '../Views/login.php?rs=success';
+                        </script>";
+                    exit();
+                } else {
+                    $error = $result;
+                }
+            }
+        }
+
+        if (!empty($error)) {
+            echo "<div class='error'>$error</div>";
+        }
     }
-
-    // Tạo đối tượng RegisterModel có thể gọi và sử dụng thuộc tính class bên model  và truyền kết nối vào
-    $registerModel = new RegisterModel($conn);
-
-    // Gọi phương thức registerUser để đăng ký người dùng(chuyển qua model kiểm tra đk thành công hay thất bại)
-    $result = $registerModel->registerUser($fullname, $email, $password, $role);
-
-    // Hiển thị kết quả đăng ký
-    echo $result;
-} else {
-    // Nếu không phải POST thì thông báo lỗi
-    echo "Invalid request method!";
 }
+
+$controller = new RegisterController();
+$controller->register();
+
 ?>

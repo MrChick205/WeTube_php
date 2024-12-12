@@ -27,7 +27,7 @@
                 </div>
                 <button type="submit">Create Account</button>
             </form>
-            <p class="login">Already have an account? <a href="#">Log in</a></p>
+            <p class="login">Already have an account? <a href="login.php">Log in</a></p>
             
             <a href="login.php" class="social">
                 <button id="google">

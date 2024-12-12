@@ -3,10 +3,10 @@
 require_once '../config/connect.php';
 
 class RegisterModel {
-    private $db;
+    private $conn;
 
     public function __construct($connection) {
-        $this->db = $connection; // $conn là đối tượng kết nối MySQLi
+        $this->conn = $connection; // $conn là đối tượng kết nối MySQLi
     }
 
     // Phương thức này kiểm tra xem email có tồn tại hay chưa trước khi cho phép đăng ký tài khoản mới
@@ -14,7 +14,7 @@ class RegisterModel {
         $sql = "SELECT * FROM users WHERE email = ?";
         
         // Sử dụng prepared statements của MySQLi
-        $stmt = $this->db->prepare($sql);
+        $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("s", $email);  // Gắn giá trị vào tham số
         
         $stmt->execute();
@@ -31,7 +31,7 @@ class RegisterModel {
 
         // Kiểm tra xem có người dùng nào trong bảng chưa
         $countQuery = "SELECT COUNT(*) FROM users";
-        $result = $this->db->query($countQuery);
+        $result = $this->conn->query($countQuery);
         $userCount = $result->fetch_row()[0];  // Lấy giá trị của cột đầu tiên (user_count)
 
         // Nếu chưa có người dùng nào, vai trò mặc định là admin
@@ -47,13 +47,13 @@ class RegisterModel {
 
         // Chèn người dùng mới vào cơ sở dữ liệu
         $sql = "INSERT INTO users (user_name, email, password, role) VALUES (?, ?, ?, ?)";
-        $stmt = $this->db->prepare($sql);
+        $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("ssss", $fullname, $email, $hashedPassword, $role);
 
         if ($stmt->execute()) {
-            return "Registration successful!";
+            return true;  // Đăng ký thành công
         } else {
-            return "Registration failed!";
+            return "Lỗi: " . $stmt->error;  // Thông báo lỗi
         }
     }
 }
