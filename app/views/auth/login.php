@@ -1,17 +1,15 @@
 <?php
-session_start(); // Khởi tạo session nếu chưa có
-require_once 'C:\xampp\htdocs\WeTube_php\app\config\connect.php'; // Kết nối tới cơ sở dữ liệu
-require_once '../../controllers/login.php'; // Đường dẫn tới LoginController
+session_start();
+require_once 'C:\xampp\htdocs\WeTube_php\app\config\connect.php';
+require_once '../../controllers/login.php';
 
-// Khởi tạo LoginController
+
 $loginController = new LoginController($conn);
 
-// Khởi tạo biến lỗi
 $error = null;
 
-// Xử lý đăng nhập
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $error = $loginController->login(); // Gọi hàm login từ LoginController
+    $error = $loginController->login();
 }
 ?>
 

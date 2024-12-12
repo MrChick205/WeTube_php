@@ -1,5 +1,5 @@
 <?php
-require_once 'C:\xampp\htdocs\WeTube_php\app\config\connect.php'; // Kết nối tới cơ sở dữ liệu
+require_once 'C:\xampp\htdocs\WeTube_php\app\config\connect.php';
 
 class LoginModel
 {
@@ -24,7 +24,7 @@ class LoginModel
         $result = mysqli_stmt_get_result($stmt);
 
         $user = mysqli_fetch_assoc($result);
-        mysqli_stmt_close($stmt); // Close the statement
+        mysqli_stmt_close($stmt);
         return $user ? $user : null;
     }
 
