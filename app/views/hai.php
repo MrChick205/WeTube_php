@@ -1,37 +1,9 @@
-<?php
-require_once '../config/connect.php';
-require_once '../controllers/user.php';
-
-// Khởi tạo controller
-$userController = new UserController($conn);
-
-// Giả sử ID người dùng được truyền qua URL (ví dụ: profile.php?id=1)
-$userId = $_GET['id'] ?? 1; // Mặc định là 1 nếu không có ID
-
-// Lấy thông tin người dùng
-$user = $userController->getUserProfile($userId);
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Xử lý cập nhật thông tin người dùng từ form
-    $updated = $userController->updateUserProfile($userId);
-
-    if ($updated) {
-        echo "<div class='alert alert-success'>User updated successfully.</div>";
-        // Cập nhật lại thông tin người dùng sau khi cập nhật
-        $user = $userController->getUserProfile($userId);
-    } else {
-        echo "<div class='alert alert-danger'>Failed to update user.</div>";
-    }
-}
-
-mysqli_close($conn);
-?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../public/asset/profile.css">
+    <link rel="stylesheet" href="/public/css/profile.css">
      <!--Bootstrap CSS-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!--Bootstrap icon-->
@@ -102,7 +74,7 @@ span {
 .content h2 {
     margin-bottom: 20px;
 }
-.img_upload {
+.upload {
     width: 200px;
     height:200px;
     border: 2px dashed #ccc;
@@ -114,7 +86,7 @@ span {
     justify-content: center;
 }
 
-.img_upload img {
+.upload img {
     width: 100%;
     height: auto;
     border-radius: 50%;
@@ -164,9 +136,6 @@ span {
     background-color: #218838;
 }
 
-p {
-    font-size: 20px;
-}
 </style>
 <body>
 
@@ -210,57 +179,32 @@ p {
     </div>
     <div id="profile_info" class="hidden">
         <h2>Your Profile</h2>
-
-        <div id="userProfile">
-            <div class="img_upload">
+        <form action="" method="POST">
+            <div class="upload">
                 <?php if (!empty($user['image'])): ?>
-                    <img src="<?php echo htmlspecialchars($user['image']); ?>" alt="User Avatar" id="profileImage">
-                <?php else: ?>
-                        <p>No image available.</p>
+                <img src="<?php echo htmlspecialchars($user['image']); ?>" alt="User Avatar" id="profileImage">
                 <?php endif; ?>
-            </div>
-            <hr>
-            <div class="form_inf">
-                <div class="mb-3">
-                    <p><strong>User name:</strong><?php echo htmlspecialchars($user['user_name']); ?></p>
-                </div>
-                <div class="mb-3">
-                    <p><strong>Email:</strong><?php echo htmlspecialchars($user['email']); ?></p>
-                </div>
-                <div class="mb-3">
-                    <p><strong>Phone number:</strong><?php echo htmlspecialchars($user['phone']); ?></p>
-                </div>
-                <button id="editButton" class="btn-update" onclick="toggleEditForm()">Edit Profile</button>
-            </div>
-        </div>
-
-        <form id="editForm" action="" method="POST" enctype="multipart/form-data" style="display: none;">
-            <div class="img_upload">
-                <?php if (!empty($user['image'])): ?>
-                <img src="<?php echo htmlspecialchars($user['image']); ?>" alt="User Avatar" id="profileImage" name="user_img">
-                <?php endif; ?>
-                <div class="camera-icon">
+                <div class="camera-icon" onclick="createFileInput();">
                     <i class="fa fa-camera" aria-hidden="true" style="font-size:28px"></i>
                 </div>
-                <input type="file" name = "image" class="file-input" accept="image/*">
             </div>
             <hr>
             <div class="form_inf">
                     <div class="mb-3">
                         <label for="username">Username</label>
-                        <input type="text" id="username" name="user_name"  value="<?php echo htmlspecialchars($user['user_name']); ?>" class="form-control">
+                        <input type="text" id="username" value="<?php echo htmlspecialchars($user['username']); ?>" class="form-control">
                     </div>
                     <div class="mb-3">
                         <label for="email">Email</label>
-                        <input type="email" id="email"  name="email" value="<?php echo htmlspecialchars($user['email']); ?>" class="form-control">
+                        <input type="email" id="email" value="<?php echo htmlspecialchars($user['email']); ?>" class="form-control">
                     </div>
                     <div class="mb-3">
                         <label for="phone">Phone number</label>
-                        <input type="tel" id="phone"   name="phone"value="<?php echo htmlspecialchars($user['phone']); ?>" class="form-control">
+                        <input type="tel" id="phone" value="<?php echo htmlspecialchars($user['phone']); ?>" class="form-control">
                     </div>
                     <div class="mb-3">
                         <label for="password">Password</label>
-                        <input type="password" id="password"  name="password" value="<?php echo htmlspecialchars($user['password']); ?>" class="form-control">
+                        <input type="text" id="password" value="<?php echo htmlspecialchars($user['password']); ?>" class="form-control">
                     </div>
             </div> 
             <button class="btn-update">Update Profile</button>
@@ -275,48 +219,43 @@ p {
 // Đóng danh sách khi nhấp ra ngoài
 window.addEventListener('click', function(event) {
     if (!event.target.matches('.arrow')) {
-        const dropdowns = document.querySelectorAll('#sidebar_Activity');
+        const dropdowns = document.querySelectorAll('.sidebar_2');
         dropdowns.forEach(dropdown => {
             dropdown.classList.remove('active');
         });
     }
 });
 
-const imgUpload = document.querySelector('.img_upload');
-    const fileInput = document.querySelector('.file-input');
-    const img = document.querySelector('#profileImage');
-
-
-    imgUpload .addEventListener('click', () => {
-    fileInput.click();
-    });
-    // Thay đổi ảnh khi user đổi
-    fileInput.addEventListener('change', (event) => {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-        img.src = e.target.result; // Thay đổi ảnh
-
-        };
-        reader.readAsDataURL(file);
+function createFileInput() {
+    // Tạo một trường nhập liệu tệp mới
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = 'image/*';
     
+    // Thêm sự kiện onchange để xử lý hình ảnh
+    fileInput.onchange = function(event) {
+        loadImage(event);
+    };
 
-    }
-    });
+    // Kích hoạt click để mở hộp thoại chọn tệp
+    fileInput.click();
+}
 
-    function toggleEditForm() {
-        const userProfile = document.getElementById('userProfile');
-        const editForm = document.getElementById('editForm');
-        if (editForm.style.display === "none") {
-            userProfile.style.display = "none";
-            editForm.style.display = "block";
-        } else {
-            userProfile.style.display = "block";
-            editForm.style.display = "none";
-        }
+function loadImage(event) {
+    const img = document.getElementById('profileImage');
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+        img.src = e.target.result; // Cập nhật ảnh hồ sơ với hình ảnh mới
+    };
+    
+    if (file) {
+        reader.readAsDataURL(file);
+    } else {
+        img.src = ''; // Xóa hình ảnh nếu không có tệp nào được chọn
     }
+}
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
