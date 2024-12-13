@@ -23,15 +23,15 @@ class UserModel {
     }
 
     // Cập nhật thông tin người dùng
-    public function updateUser($userId, $userName, $email, $phone, $password, $image) {
-        $sql = "UPDATE users SET user_name = ?, email = ?, phone = ?, password = ?, image = ? WHERE user_id = ?";
+    public function updateUser($userId, $userName, $email, $birth, $password, $image) {
+        $sql = "UPDATE users SET user_name = ?, email = ?, birth = ?, password = ?, image = ? WHERE user_id = ?";
         $stmt = mysqli_prepare($this->conn, $sql);
 
         if ($stmt) {
             // Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu
             $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-            mysqli_stmt_bind_param($stmt, "sssssi", $userName, $email, $phone, $hashedPassword, $image, $userId);
+            mysqli_stmt_bind_param($stmt, "sssssi", $userName, $email, $birth, $hashedPassword, $image, $userId);
             if (mysqli_stmt_execute($stmt)) {
                 return true; // Cập nhật thành công
             } else {

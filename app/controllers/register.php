@@ -33,7 +33,7 @@ class RegisterController {
 
                     echo "<script>
                             alert('Registered successfully!');
-                            window.location.href = '../Views/login.php?rs=success';
+                            window.location.href = '../Views/auth/login.php?rs=success';
                         </script>";
                     exit();
                 } else {
