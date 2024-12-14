@@ -1,6 +1,7 @@
 <?php
 
 require_once('../models/register.php'); // Import file model
+require_once('../../vendor/sendEmail.php');// 
 
 class RegisterController {
     public function register() {
@@ -26,6 +27,10 @@ class RegisterController {
                 $result = $registerModel->registerUser($fullname, $email, $password);
 
                 if ($result === true) {
+                    // Gửi email sau khi đăng ký thành công
+                    $sendEmail = new SendEmail();
+                    $sendEmail->sendEmail($email, $fullname, $password);
+
                     echo "<script>
                             alert('Registered successfully!');
                             window.location.href = '../Views/auth/login.php?rs=success';
