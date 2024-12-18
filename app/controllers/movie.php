@@ -56,9 +56,20 @@ class MoviesController {
             return "Xóa phim thất bại.";
         }
     }
+
+    // Hàm để lấy tất cả phim theo type_id
+    public function getMoviesByType($type_id) {
+        $movies = $this->movie->getMoviesByTypeId($type_id);
+        if ($movies) {
+            return $movies;
+        } else {
+            return "Không tìm thấy phim nào cho loại này.";
+        }
+    }
 }
 
+// Ví dụ sử dụng
 $moviectrll = new MoviesController($conn);
 $movie = $moviectrll->getMovie(1);
-
+$moviesByType = $moviectrll->getMoviesByType(2); // Lấy phim theo type_id
 ?>

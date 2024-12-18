@@ -69,5 +69,15 @@ class Movie {
             return false;
         }
     }
+
+    // Lấy tất cả phim theo type_id
+    public function getMoviesByTypeId($type_id) {
+        $query = "SELECT * FROM " . $this->table_name . " WHERE type_id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $type_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 }
 ?>
