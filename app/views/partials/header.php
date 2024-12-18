@@ -99,7 +99,7 @@
 
 <body>
     <div class="nav">
-        <div class="logo"><img src="/Your paragraph text.png" alt=""></div>
+        <div class="logo"><img src="../../../public/asset/logo-wetube.png" alt=""></div>
         <div>Home</div>
         <div class="srch">
             <input type="text" placeholder="Search...">
