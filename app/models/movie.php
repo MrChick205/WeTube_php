@@ -1,49 +1,73 @@
 <?php
-require_once '../config/connect.php';
+require_once "../config/connect.php";
 
-class MovieModel {
+class Movie {
     private $conn;
+    private $table_name = "movies";
 
-    public function __construct($connection) {
-        $this->conn = $connection;
+    public function __construct($conn) {
+        $this->conn = $conn;
     }
 
-    // Lấy phim theo ID
+    // Lấy thông tin phim theo movie_id
     public function getMovieById($movie_id) {
-        $stmt = $this->conn->prepare("SELECT * FROM movies WHERE movie_id = ?");
+        $query = "SELECT * FROM " . $this->table_name . " WHERE movie_id = ?";
+        $stmt = $this->conn->prepare($query);
         $stmt->bind_param("i", $movie_id);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_assoc();
     }
 
-    // Thêm phim vào danh sách yêu thích
-    public function addToFavorites($user_id, $movie_id) {
-        $stmt = $this->conn->prepare("INSERT INTO 'like' (user_id, movie_id) VALUES (?, ?)");
-        $stmt->bind_param("ii", $user_id, $movie_id);
-        return $stmt->execute();
-    }
-
-    // Thêm phim vào bộ sưu tập
-    public function addToCollection($user_id, $movie_id) {
-        $stmt = $this->conn->prepare("INSERT INTO collections (user_id, movie_id) VALUES (?, ?)");
-        $stmt->bind_param("ii", $user_id, $movie_id);
-        return $stmt->execute();
-    }
-
-    // Thêm bình luận
-    public function addComment($user_id, $movie_id, $comment) {
-        $stmt = $this->conn->prepare("INSERT INTO comment (user_id, movie_id, content) VALUES (?, ?, ?)");
-        $stmt->bind_param("iis", $user_id, $movie_id, $comment);
-        return $stmt->execute();
-    }
-
-    // Lấy danh sách bình luận
-    public function getComments($movie_id) {
-        $stmt = $this->conn->prepare("SELECT c.content, u.user_name FROM comment c JOIN users u ON c.user_id = u.user_id WHERE c.movie_id = ?");
-        $stmt->bind_param("i", $movie_id);
+    // Lấy tất cả phim
+    public function getAllMovies() {
+        $query = "SELECT * FROM " . $this->table_name;
+        $stmt = $this->conn->prepare($query);
         $stmt->execute();
-        return $stmt->get_result();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    // Thêm mới một bộ phim
+    public function createMovie($title, $description, $movie_url, $type_id, $poster) {
+        $query = "INSERT INTO " . $this->table_name . " (title, description, movie_url, type_id, poster)
+                  VALUES (?, ?, ?, ?, ?)";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("sssds", $title, $description, $movie_url, $type_id, $poster);
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Cập nhật thông tin phim
+    public function updateMovie($movie_id, $title, $description, $movie_url, $type_id, $poster) {
+        $query = "UPDATE " . $this->table_name . "
+                  SET title = ?, description = ?, movie_url = ?, type_id = ?, poster = ?
+                  WHERE movie_id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("sssisi", $title, $description, $movie_url, $type_id, $poster, $movie_id);
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Xóa một bộ phim
+    public function deleteMovie($movie_id) {
+        $query = "DELETE FROM " . $this->table_name . " WHERE movie_id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $movie_id);
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 ?>

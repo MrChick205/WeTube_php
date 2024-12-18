@@ -1,3 +1,6 @@
+<?php
+require_once('../controllers/movie.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,14 +64,14 @@
                 </div>
                 <div class="show_cmt">
                     <img class= "ano_avarta" src="https://chiemtaimobile.vn/images/companies/1/%E1%BA%A2nh%20Blog/avatar-facebook-dep/top-36-anh-dai-dien-dep-cho-nu/anh-dai-dien-dep-cho-nu-che-mat-anime.jpg?1708401649581" alt="">
-                    <?php while ($row = $comments->fetch_assoc()) { ?>
+                    
                         <div class="show_content">
                             <div class="name_user">
-                                <p><b><?php echo $row['user_name']; ?>:</b></p>
+                                <p><b>Hồ Thị Tiếp</b></p>
                             </div>
-                            <p><?php echo $row['comment']; ?></p>
+                            <p>Phim này hay quá. Tôi thích nội dung của phim!</p>
                         </div>
-                    <?php } ?>
+                    
                 </div>
             </div>
         </div>
