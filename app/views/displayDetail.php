@@ -1,3 +1,15 @@
+<?php 
+    require_once 'C:\xampp\htdocs\WeTube_php\app\controllers\detailController.php';
+    // Lấy movie_id từ URL (nếu có)
+    $movieId = isset($_GET['movie_id']);
+
+    // Khởi tạo và gọi phương thức hiển thị
+    $controller = new DetailController($conn);
+    $controller->showMovieDetail($movieId);
+
+    // Đóng kết nối
+    mysqli_close($conn);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,16 +31,16 @@
         <div class="row mb-4">
             <div class="movie_card col-md-4">
                 <div class="img_card">
-                    <img src="https://phimimg.com/upload/vod/20241105-1/ff9b778b3f26b2b82af290a6b306c40f.jpg" class="img-fluid" alt="Movie Image">
+                    <img src="<?= htmlspecialchars( $controller['poster']) ?>" class="img-fluid" alt="Movie Image">
                 </div>
                <div class="btn_movie">
                 <a href="#" class="btn_dpl btn btn-danger"><ion-icon name="caret-forward-outline" style="font-size: 24px;"></ion-icon>Xem phim</a>
                </div>
             </div>
             <div class="col-md-8">
-                <h1>LOVE</h1>
+                <h1><?= htmlspecialchars( $controller['title']) ?></h1>
                 <p>describle</p>
-                <p>hdgfyebhdgfyuafyuagfua</p>
+                <p><?= htmlspecialchars( $controller['discription']) ?></p>
             </div>
         </div>
         <div class="row">
