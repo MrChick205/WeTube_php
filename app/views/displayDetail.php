@@ -1,14 +1,5 @@
-<?php 
-    require_once 'C:\xampp\htdocs\WeTube_php\app\controllers\detailController.php';
-    // Lấy movie_id từ URL (nếu có)
-    $movieId = isset($_GET['movie_id']);
-
-    // Khởi tạo và gọi phương thức hiển thị
-    $controller = new DetailController($conn);
-    $controller->showMovieDetail($movieId);
-
-    // Đóng kết nối
-    mysqli_close($conn);
+<?php
+require_once 'C:\xampp\htdocs\WeTube_php\app\controllers\movie.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,16 +22,16 @@
         <div class="row mb-4">
             <div class="movie_card col-md-4">
                 <div class="img_card">
-                    <img src="<?= htmlspecialchars( $controller['poster']) ?>" class="img-fluid" alt="Movie Image">
+                    <img src="<?= htmlspecialchars( $movie['poster']) ?>" class="img-fluid" alt="Movie Image">
                 </div>
                <div class="btn_movie">
-                <a href="#" class="btn_dpl btn btn-danger"><ion-icon name="caret-forward-outline" style="font-size: 24px;"></ion-icon>Xem phim</a>
+                <a href="watch_movie.php?id=<?= $movie['movie_id'] ?>" class="btn_dpl btn btn-danger"><ion-icon name="caret-forward-outline" style="font-size: 24px;"></ion-icon>Xem phim</a>
                </div>
             </div>
             <div class="col-md-8">
-                <h1><?= htmlspecialchars( $controller['title']) ?></h1>
+                <h1><?= htmlspecialchars( $movie['title']) ?></h1>
                 <p>describle</p>
-                <p><?= htmlspecialchars( $controller['discription']) ?></p>
+                <p><?= htmlspecialchars($movie['description']) ?></p>
             </div>
         </div>
         <div class="row">

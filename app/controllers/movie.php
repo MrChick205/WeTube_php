@@ -1,5 +1,5 @@
 <?php
-include_once 'C:\xamppp\htdocs\Wetube\WeTube_php\app\models\movie.php';
+include_once '../models/movie.php';
 
 class MoviesController {
     private $movie; // Đối tượng Movie
