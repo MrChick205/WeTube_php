@@ -1,5 +1,5 @@
 <?php
-include_once 'C:\xamppp\htdocs\Wetube\WeTube_php\app\models\movie.php';
+include_once '../models/movie.php';
 
 class MoviesController {
     private $movie; // Đối tượng Movie
@@ -56,9 +56,30 @@ class MoviesController {
             return "Xóa phim thất bại.";
         }
     }
+
+    // Hàm để lấy tất cả phim theo type_id
+    public function getMoviesByType($type_id) {
+        $movies = $this->movie->getMoviesByTypeId($type_id);
+        if ($movies) {
+            return $movies;
+        } else {
+            return "Không tìm thấy phim nào cho loại này.";
+        }
+    }
+
+    // Hàm để lấy 3 bộ phim mới nhất
+    public function getLatestMovies() {
+        $latest_movies = $this->movie->getLatestMovies();
+        if ($latest_movies) {
+            return $latest_movies;
+        } else {
+            return "Không có phim mới nào.";
+        }
+    }
 }
 
+// Ví dụ sử dụng
 $moviectrll = new MoviesController($conn);
-$movie = $moviectrll->getMovie(1);
-
+$moviesByType = $moviectrll->getMoviesByType(2); // Lấy phim theo type_id
+$latestMovies = $moviectrll->getLatestMovies(); // Lấy 3 bộ phim mới nhất
 ?>
