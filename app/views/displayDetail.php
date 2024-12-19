@@ -1,14 +1,20 @@
 <?php
 require_once 'C:\xampp\htdocs\WeTube_php\app\controllers\movie.php';
-// // Lấy thông tin phim từ controller
-// $movie_id = isset($_GET['id']) ? intval($_GET['id']) : 0; // Lấy movie_id từ URL (vd: detail.php?id=1)
-// $movie = $moviectrll->getMovie($movie_id);
 
-// // Nếu không tìm thấy phim, hiển thị thông báo lỗi
-// if (!$movie || is_string($movie)) {
-//     echo "<p>Không tìm thấy thông tin phim.</p>";
-//     exit;
-// }
+// Lấy movie_id từ URL
+if (isset($_GET['movie_id'])) {
+    $movieId = intval($_GET['movie_id']);
+    $movie = $moviectrll->getMovie($movieId);
+} else {
+    // Nếu không có movie_id, có thể chuyển hướng hoặc hiển thị thông báo
+    die("Movie ID is required.");
+}
+// $movieId = 1;
+// $movie = $moviectrll->getMovie($movieId);
+
+// Lấy danh sách phim tương tự (cùng chủ đề)
+$type_id = $movie['type_id'];
+$similar_movies = $moviectrll->getMoviesByType($type_id);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,12 +40,12 @@ require_once 'C:\xampp\htdocs\WeTube_php\app\controllers\movie.php';
                     <img src="<?= htmlspecialchars( $movie['poster']) ?>" class="img-fluid" alt="Movie Image">
                 </div>
                <div class="btn_movie">
-                <a href="watch_movie.php?id=<?= $movie['movie_id'] ?>" class="btn_dpl btn btn-danger"><ion-icon name="caret-forward-outline" style="font-size: 24px;"></ion-icon>Xem phim</a>
+                    <a href="watch_movie.php?movie_id=<?= $movie['movie_id'] ?>" class="btn_dpl btn btn-danger"><ion-icon name="caret-forward-outline" style="font-size: 24px;"></ion-icon>Xem phim</a>
                </div>
             </div>
             <div class="col-md-8">
                 <h1><?= htmlspecialchars( $movie['title']) ?></h1>
-                <p>describle</p>
+                <p><strong>Description:</strong></p>
                 <p><?= htmlspecialchars($movie['description']) ?></p>
             </div>
         </div>
@@ -47,16 +53,26 @@ require_once 'C:\xampp\htdocs\WeTube_php\app\controllers\movie.php';
             <div class="col-12">
                 <h2>Similar movies</h2>
             </div>
-            <div class="col-3">
-                <div class="card">
-                    <img src="https://phimimg.com/upload/vod/20241114-1/b145f04a857ff4f425308b1592da0cf0.jpg" class="card-img-top" alt="Movie 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Movie Title 1</h5>
-                    </div>
-                </div>
-            </div>
+            <?php if (is_array($similar_movies) && !empty($similar_movies)): ?>
+                <?php foreach ($similar_movies as $similar_movie): ?>
+                    <?php if ($similar_movie['movie_id'] != $movieId): // Loại trừ phim hiện tại ?>
+                        <div class="col-md-3 mb-3">
+                            <div class="card">
+                                <img src="<?= htmlspecialchars($similar_movie['poster']) ?>" class="card-img-top" alt="<?= htmlspecialchars($similar_movie['title']) ?>">
+                                <div class="card-body">
+                                    <h5 class="card-title"><?= htmlspecialchars($similar_movie['title']) ?></h5>
+                                    <a href="watch_movie.php?movie_id=<?= $movie['movie_id'] ?>" class="btn_dpl btn btn-danger"><ion-icon name="caret-forward-outline" style="font-size: 24px;"></ion-icon>Xem phim</a>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>Không có phim tương tự nào.</p>
+            <?php endif; ?>
         </div>
     </div>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-1Z5bWn0Q3uHq0v3C5G6o74zQ6T1T4p1cl8k6D2jJ4hU5e9G5s2W0T5QwEBRz3A5R" crossorigin="anonymous"></script>
 </body>
