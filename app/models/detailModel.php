@@ -1,5 +1,6 @@
 <?php
 require_once 'C:\xampp\htdocs\WeTube_php\app\config\connect.php';
+
 class DetailModel {
     private $conn;
 
@@ -7,26 +8,28 @@ class DetailModel {
         $this->conn = $conn;
     }
 
-    // Lấy thông tin phim theo ID
-    public function getMovieById($movieId) {
-        $sql = "SELECT * FROM movies WHERE movie_id = ?";
-        $stmt = mysqli_prepare($this->conn, $sql);
+    public function getMovies($movieID) {
+        $sql = "SELECT m.movie_id, m.title, m.description, m.movie_url, m.poster, m.type_id, t.type_name
+                FROM movies m
+                JOIN type t ON m.type_id = t.type_id
+                WHERE m.movie_id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param('i', $movieID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+    }
 
-        if ($stmt) {
-            mysqli_stmt_bind_param($stmt, "i", $movieId);
-            mysqli_stmt_execute($stmt);
-            $result = mysqli_stmt_get_result($stmt);
-            if  ($result && mysqli_num_rows($result) > 0)  {
-                return mysqli_fetch_assoc($result);
-            } else {
-                echo "No movie found with the given ID.";
-                return null;
-            }
-        } else {
-            echo "Error preparing statement: " . mysqli_error($this->conn);
-            return null;
-        }
+    public function getRelatedMovies($movieID, $typeID) {
+        $sql = "SELECT m.movie_id, m.title, m.description, m.movie_url, m.poster, m.type_id, t.type_name
+                FROM movies m
+                JOIN type t ON m.type_id = t.type_id
+                WHERE m.type_id = ? AND m.movie_id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param('ii', $typeID, $movieID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
     }
 }
-
-
+?>

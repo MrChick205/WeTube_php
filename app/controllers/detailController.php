@@ -1,23 +1,35 @@
 <?php
-    require_once 'C:\xampp\htdocs\WeTube_php\app\models\detailModel.php';
+require_once '../models/detailModel.php';
 
-    class DetailController {
-        private $detailModel;
-    
-        public function __construct($connection) {
-            $this->detailModel = new DetailModel($connection);
-        }
-    
-        public function showMovieDetail($movieId) {
-            $movie = $this->detailModel->getMovieById($movieId);
-            if ($movie) {
-                // Gửi dữ liệu đến view để hiển thị
-                require 'views/detailDisplay.php';
-            } else {
-                // Hiển thị thông báo lỗi hoặc chuyển hướng
-                echo "Movie not found!";
-            }
+class DetailController {
+    private $conn;
+
+    public function __construct($conn) {
+        $this->conn = new DetailModel($conn);
     }
-    }   
+
+    public function showMovieDetail($movieID) {
+        // Get current movie data
+        $movie = $this->conn->getMovies($movieID);
+        if ( $movie) {
+            return  $movie;
+        } else {
+            return ["error" => "Movie not found."];
+        }
+    }
+    // Get list of related movies
+    public function getRelatedMovies($movieID) {
+        $movie = $this->conn->getMovies($movieID);
+        $typeID =  $movie ['type_id'];
+
+        $relatedMovies = $this->conn->getRelatedMovies($movieID, $typeID);
+
+        if ($relatedMovies) {
+            return $relatedMovies;
+        } else {
+            return [];
+        }
+    }
+    }
 
 ?>

@@ -1,5 +1,14 @@
 <?php
 require_once 'C:\xampp\htdocs\WeTube_php\app\controllers\movie.php';
+// // Lấy thông tin phim từ controller
+// $movie_id = isset($_GET['id']) ? intval($_GET['id']) : 0; // Lấy movie_id từ URL (vd: detail.php?id=1)
+// $movie = $moviectrll->getMovie($movie_id);
+
+// // Nếu không tìm thấy phim, hiển thị thông báo lỗi
+// if (!$movie || is_string($movie)) {
+//     echo "<p>Không tìm thấy thông tin phim.</p>";
+//     exit;
+// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,30 +52,6 @@ require_once 'C:\xampp\htdocs\WeTube_php\app\controllers\movie.php';
                     <img src="https://phimimg.com/upload/vod/20241114-1/b145f04a857ff4f425308b1592da0cf0.jpg" class="card-img-top" alt="Movie 1">
                     <div class="card-body">
                         <h5 class="card-title">Movie Title 1</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card">
-                    <img src="https://phimimg.com/upload/vod/20241031-1/17d28211ff9cfb483570b17a7ab00570.jpg" class="card-img-top" alt="Movie 2">
-                    <div class="card-body">
-                        <h5 class="card-title">Movie Title 2</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card">
-                    <img src="https://phimimg.com/upload/vod/20241113-1/8aea15a945bd6c5018ac2a42c6be0a6c.jpg" class="card-img-top" alt="Movie 3">
-                    <div class="card-body">
-                        <h5 class="card-title">Movie Title 3</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card">
-                    <img src="https://phimimg.com/upload/vod/20230920-1/7af5eee1d213d731ac8e01dacad7ac05.jpg" class="card-img-top" alt="Movie 4">
-                    <div class="card-body">
-                        <h5 class="card-title">Movie Title 4</h5>
                     </div>
                 </div>
             </div>
