@@ -57,8 +57,8 @@ body {
 }
 
 @media (min-width: 1200px) {
-.container, .container-lg, .container-md, .container-sm, .container-xl {
-max-width: 1180px;
+.container {
+max-width: 95%;
     }
 }
 
@@ -121,8 +121,8 @@ span, p {
 
 .camera-icon {
     position: absolute; 
-    top: 280px;  
-    right: 34%; 
+    top: 230px;  
+    right: 40%; 
     background-color: rgba(255, 255, 255, 0.7); 
     border-radius: 50%; 
     padding: 5px; 

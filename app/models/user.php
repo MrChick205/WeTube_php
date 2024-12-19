@@ -33,10 +33,10 @@ class UserModel {
 
             mysqli_stmt_bind_param($stmt, "sssssi", $userName, $email, $birth, $hashedPassword, $image, $userId);
             if (mysqli_stmt_execute($stmt)) {
-                return true; // Cập nhật thành công
+                return true;
             } else {
                 echo "Error executing statement: " . mysqli_error($this->conn);
-                return false; // Cập nhật thất bại
+                return false;
             }
         } else {
             echo "Error preparing statement: " . mysqli_error($this->conn);
