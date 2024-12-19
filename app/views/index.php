@@ -1,17 +1,3 @@
-<?php
-session_start(); // Đảm bảo rằng session đã được khởi động
-
-if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
-    $userId = $_SESSION['user_id'];
-    $userEmail = $_SESSION['user_email'];
-
-    echo "User ID: " . htmlspecialchars($userId);
-    echo "User Email: " . htmlspecialchars($userEmail);
-} else {
-    echo "Người dùng chưa đăng nhập.";
-}
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +6,32 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
     <title>Document</title>
 </head>
 <body>
-
-    <a href="auth/logout.php"><button>logout</button></a>
+    <div class="container">
+        <div>Slide
+            <div class="content">
+                
+            </div>
+        </div>
+        <div>trending
+            <div class="content">
+                
+            </div>
+        </div>
+        <div>New release movies
+            <div class="content">
+                
+            </div>
+        </div>
+        <div>movies at home
+            <div class="content">
+                
+            </div>
+        </div>
+        <div>recommended
+            <div class="content">
+                
+            </div>
+        </div>
+    </div>
 </body>
 </html>
