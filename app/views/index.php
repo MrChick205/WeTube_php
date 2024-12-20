@@ -67,7 +67,7 @@ h2 a:hover {
     transition: transform 0.3s ease;
     display: flex;
     flex-direction: column; /* Đảm bảo nội dung nằm dọc */
-    padding: 10px; /* Thêm khoảng cách bên trong */
+    /* padding: 10px;  */
 }
 
 .new-release .movie:hover {
@@ -141,7 +141,7 @@ h2 a:hover {
     transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    /* padding: 10px; */
 }
 
 .section .movie:hover {
@@ -150,18 +150,24 @@ h2 a:hover {
 
 .section .movie img {
     width: 100%;
-    height: 200px;
+    height: 250px;
     object-fit: cover;
     display: block;
-    border-radius: 8px;
+    /* border-radius: 8px; */
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 
-.section .movie h3 {
-    font-size: 16px;
-    margin: 10px 0;
-    color: white;
+.movie_title {
+    height: 60px;
     text-align: center;
-    line-height: 1.3;
+    margin-top: -10px;
+}
+
+.movie_title h3 {
+    font-size: 16px;
+    color: white;
+    padding: 4px;
 }
 
 .section .watch-button {
@@ -214,7 +220,9 @@ h2 a:hover {
                             echo "<div class='movie'>";
                             echo "<img src='" . htmlspecialchars($movie['poster']) . "' alt='" . htmlspecialchars($movie['title']) . "' />";
                             echo "<div class='play-button'>▶</div>";
+                            echo "<div class='movie_title'>";
                             echo "<h3>" . htmlspecialchars($movie['title']) . "</h3>";
+                            echo "</div>";
                             echo "<div class='genres'>";
                             foreach (explode(',', $movie['type_id']) as $genre) {
                                 echo "<span class='genre-tag'>" . htmlspecialchars($genre) . "</span>";
@@ -239,9 +247,11 @@ h2 a:hover {
                 if (is_array($trendingMovies)) {
                     foreach ($trendingMovies as $movie) {
                         echo "<div class='movie'>";
-                        echo "<h3>" . htmlspecialchars($movie['title']) . "</h3>";
                         echo "<img src='" . htmlspecialchars($movie['poster']) . "' alt='" . htmlspecialchars($movie['title']) . "' />";
-                        echo "<a class='watch-button' href='watch_movie.php?movie_id=" . htmlspecialchars($movie['movie_id']) . "'>Xem phim</a>";
+                        echo "<div class='movie_title'>";
+                        echo "<h3>" . htmlspecialchars($movie['title']) . "</h3>";
+                        echo "</div>";
+                        echo "<a class='watch-button' href='watch_movie.php?movie_id=" . htmlspecialchars($movie['movie_id']) . "'>Watch movie</a>";
                         echo "</div>";
                     }
                 } else {
@@ -259,9 +269,11 @@ h2 a:hover {
                 if (is_array($cartoonMovies)) {
                     foreach ($cartoonMovies as $movie) {
                         echo "<div class='movie'>";
-                        echo "<h3>" . htmlspecialchars($movie['title']) . "</h3>";
                         echo "<img src='" . htmlspecialchars($movie['poster']) . "' alt='" . htmlspecialchars($movie['title']) . "' />";
-                        echo "<a class='watch-button' href='watch_movie.php?movie_id=" . htmlspecialchars($movie['movie_id']) . "'>Xem phim</a>";
+                        echo "<div class='movie_title'>";
+                        echo "<h3>" . htmlspecialchars($movie['title']) . "</h3>";
+                        echo "</div>";
+                        echo "<a class='watch-button' href='watch_movie.php?movie_id=" . htmlspecialchars($movie['movie_id']) . "'>Watch movie</a>";
                         echo "</div>";
                     }
                 } else {
@@ -279,9 +291,11 @@ h2 a:hover {
                 if (is_array($recommendedMovies)) {
                     foreach ($recommendedMovies as $movie) {
                         echo "<div class='movie'>";
-                        echo "<h3>" . htmlspecialchars($movie['title']) . "</h3>";
                         echo "<img src='" . htmlspecialchars($movie['poster']) . "' alt='" . htmlspecialchars($movie['title']) . "' />";
-                        echo "<a class='watch-button' href='watch_movie.php?movie_id=" . htmlspecialchars($movie['movie_id']) . "'>Xem phim</a>";
+                        echo "<div class='movie_title'>";
+                        echo "<h3>" . htmlspecialchars($movie['title']) . "</h3>";
+                        echo "</div>";
+                        echo "<a class='watch-button' href='watch_movie.php?movie_id=" . htmlspecialchars($movie['movie_id']) . "'>Watch movie</a>";
                         echo "</div>";
                     }
                 } else {
