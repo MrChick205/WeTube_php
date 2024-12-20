@@ -1,16 +1,16 @@
 <?php
 require_once 'C:\xampp\htdocs\WeTube_php\app\controllers\movie.php';
 
-// Lấy movie_id từ URL
-if (isset($_GET['movie_id'])) {
-    $movieId = intval($_GET['movie_id']);
-    $movie = $moviectrll->getMovie($movieId);
-} else {
-    // Nếu không có movie_id, có thể chuyển hướng hoặc hiển thị thông báo
-    die("Movie ID is required.");
-}
-// $movieId = 1;
-// $movie = $moviectrll->getMovie($movieId);
+// // Lấy movie_id từ URL
+// if (isset($_GET['movie_id'])) {
+//     $movieId = intval($_GET['movie_id']);
+//     $movie = $moviectrll->getMovie($movieId);
+// } else {
+//     // Nếu không có movie_id, có thể chuyển hướng hoặc hiển thị thông báo
+//     die("Movie ID is required.");
+// }
+$movieId = 1;
+$movie = $moviectrll->getMovie($movieId);
 
 // Lấy danh sách phim tương tự (cùng chủ đề)
 $type_id = $movie['type_id'];
@@ -28,9 +28,44 @@ $similar_movies = $moviectrll->getMoviesByType($type_id);
     <!-- Ionicons -->
     <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons.js"></script>
 <style>
-.img_card {
-    margin-bottom: 10px;
-}
+    body {
+    background-color: black;
+    }
+
+    .card-title, h2, p {
+        color: white;
+    }
+    .img_card {
+        margin-bottom: 15px;
+    }
+
+    .img-fluid {
+        width: 300px;
+        height: 400px;
+        object-fit: contain;
+    }
+
+    .btn_dpl  {
+        margin-left: 25%;
+        box-shadow: none;
+    }
+
+    .card-img-top {
+        height: 350px;
+    }
+
+    .card_item {
+        height:60px;
+    }
+
+    .card_item>.card-title {
+        text-align: center;
+    }
+    
+    .card_detail {
+       background-color:  #1c1c1c;
+    }
+
 </style>
 <body>
     <div class="container mt-5">
@@ -44,7 +79,7 @@ $similar_movies = $moviectrll->getMoviesByType($type_id);
                </div>
             </div>
             <div class="col-md-8">
-                <h1><?= htmlspecialchars( $movie['title']) ?></h1>
+                <h1 class="card-title"><?= htmlspecialchars( $movie['title']) ?></h1>
                 <p><strong>Description:</strong></p>
                 <p><?= htmlspecialchars($movie['description']) ?></p>
             </div>
@@ -57,11 +92,15 @@ $similar_movies = $moviectrll->getMoviesByType($type_id);
                 <?php foreach ($similar_movies as $similar_movie): ?>
                     <?php if ($similar_movie['movie_id'] != $movieId): // Loại trừ phim hiện tại ?>
                         <div class="col-md-3 mb-3">
-                            <div class="card">
+                            <div class="card_detail card">
                                 <img src="<?= htmlspecialchars($similar_movie['poster']) ?>" class="card-img-top" alt="<?= htmlspecialchars($similar_movie['title']) ?>">
                                 <div class="card-body">
-                                    <h5 class="card-title"><?= htmlspecialchars($similar_movie['title']) ?></h5>
-                                    <a href="watch_movie.php?movie_id=<?= $movie['movie_id'] ?>" class="btn_dpl btn btn-danger"><ion-icon name="caret-forward-outline" style="font-size: 24px;"></ion-icon>Xem phim</a>
+                                    <div class="card_item">
+                                        <h5 class="card-title"><?= htmlspecialchars($similar_movie['title']) ?></h5>
+                                    </div>
+                                    <div>
+                                        <a href="watch_movie.php?movie_id=<?= $movie['movie_id'] ?>" class="btn_dpl btn btn-danger"><ion-icon name="caret-forward-outline" style="font-size: 24px;"></ion-icon>Xem phim</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
