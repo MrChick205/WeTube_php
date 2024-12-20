@@ -2,7 +2,7 @@
 	// session_start();
 	$host = "localhost";
 	$user = "root";
-	$password = "Hiep@1609";
+	$password = "";
 	$database = "wetube";
 
 	// Create connection
