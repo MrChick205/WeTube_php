@@ -47,6 +47,12 @@ $similar_movies = $moviectrll->getMoviesByType($type_id);
 
     .btn_dpl  {
         margin-left: 25%;
+    }
+
+    .btn_icon {
+        display: grid;
+        grid-template-columns: auto auto; 
+        align-items: center; 
         box-shadow: none;
     }
 
@@ -75,7 +81,12 @@ $similar_movies = $moviectrll->getMoviesByType($type_id);
                     <img src="<?= htmlspecialchars( $movie['poster']) ?>" class="img-fluid" alt="Movie Image">
                 </div>
                <div class="btn_movie">
-                    <a href="watch_movie.php?movie_id=<?= $movie['movie_id'] ?>" class="btn_dpl btn btn-danger"><ion-icon name="caret-forward-outline" style="font-size: 24px;"></ion-icon>Xem phim</a>
+                    <a href="watch_movie.php?movie_id=<?= $movie['movie_id'] ?>" class="btn_dpl btn btn-danger">
+                        <div class="btn_icon">
+                            <ion-icon name="caret-forward-outline" style="font-size: 20px;"></ion-icon>
+                            <span>Watch movie</span>
+                        </div>
+                    </a>
                </div>
             </div>
             <div class="col-md-8">
@@ -98,8 +109,13 @@ $similar_movies = $moviectrll->getMoviesByType($type_id);
                                     <div class="card_item">
                                         <h5 class="card-title"><?= htmlspecialchars($similar_movie['title']) ?></h5>
                                     </div>
-                                    <div>
-                                        <a href="watch_movie.php?movie_id=<?= $movie['movie_id'] ?>" class="btn_dpl btn btn-danger"><ion-icon name="caret-forward-outline" style="font-size: 24px;"></ion-icon>Xem phim</a>
+                                    <div class="btn_movie">
+                                        <a href="watch_movie.php?movie_id=<?= $movie['movie_id'] ?>" class="btn_dpl btn btn-danger">
+                                            <div class="btn_icon">
+                                                <ion-icon name="caret-forward-outline" style="font-size: 20px;"></ion-icon>
+                                                <span>Watch movie</span>
+                                            </div>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
