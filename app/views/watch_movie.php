@@ -1,5 +1,6 @@
 <?php
 require_once('../controllers/movie.php');
+require_once('../controllers/like.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,12 +24,14 @@ require_once('../controllers/movie.php');
                 <h1><?php echo $movie['title']; ?></h1>
             </div>
             <div class="icon">
-                <form method="post">
-                    <div class="heart_icon">
-                        <button type="submit" name="favorite"><i class="bi bi-heart-fill"></i></button>    
+                <form method="post" class= "form_icon">
+                    <div class="heart_icon" id="heart_icon">
+                        <button type="submit" name="favorite">
+                            <i class="bi bi-heart-fill"></i>
+                        </button>    
                     </div>
                     <div class="num_heart">
-                        <p>1000</p>
+                        <p><?php echo $likeCount; ?></p>
                     </div>
                     <div class="collection_icon">
                         <button type="submit" name="collection"><i class="fa fa-bookmark-o"></i></button>
@@ -56,7 +59,7 @@ require_once('../controllers/movie.php');
                             <input type="text" name="comment_text" placeholder="Nhập bình luận">
                             <div class="button_cmt">
                                 <button class="cancel"> Cancel</button>
-                                <button type="submit" name="comment">Comment</button>
+                                <button class= "post_cmt"type="submit" name="comment">Comment</button>
                             </div>
                         </form>
                     </div>
@@ -76,5 +79,6 @@ require_once('../controllers/movie.php');
             </div>
         </div>
     </div>
+    <script src="../../public/asset/js/like.js"></script>
 </body>
 </html>

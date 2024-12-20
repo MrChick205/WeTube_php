@@ -3,8 +3,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-require_once 'C:\xampp\htdocs\WeTube_php\app\models\login.php';
-require_once 'C:\xampp\htdocs\WeTube_php\app\config\connect.php';
+require_once 'C:\xamppp\htdocs\Wetube\WeTube_php\app\models\login.php';
 
 class LoginController
 {
@@ -40,7 +39,7 @@ class LoginController
     public function logout()
     {
         session_destroy();
-        header("Location: /WeTube_php/app/views/index.php");
+        header("Location: ../WeTube_php/app/views/index.php");
         exit();
     }
 }
