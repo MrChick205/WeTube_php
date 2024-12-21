@@ -1,6 +1,5 @@
 <?php
 session_start();
-require_once 'C:\xampp\htdocs\WeTube_php\app\config\connect.php';
 require_once '../../controllers/login.php';
 
 

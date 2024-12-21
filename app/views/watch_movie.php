@@ -1,5 +1,6 @@
 <?php
 require_once('../controllers/movie.php');
+require_once('../controllers/like.php');
 
 // Lấy movie_id từ URL
 if (isset($_GET['movie_id'])) {
@@ -37,12 +38,14 @@ if (isset($_GET['movie_id'])) {
                 <h1><?php echo htmlspecialchars($movie['title']); ?></h1>
             </div>
             <div class="icon">
-                <form method="post">
-                    <div class="heart_icon">
-                        <button type="submit" name="favorite"><i class="bi bi-heart-fill"></i></button>    
+                <form method="post" class= "form_icon">
+                    <div class="heart_icon" id="heart_icon">
+                        <button type="submit" name="favorite">
+                            <i class="bi bi-heart-fill"></i>
+                        </button>    
                     </div>
                     <div class="num_heart">
-                        <p>1000</p>
+                        <p><?php echo $likeCount; ?></p>
                     </div>
                     <div class="collection_icon">
                         <button type="submit" name="collection"><i class="fa fa-bookmark-o"></i></button>
@@ -88,5 +91,6 @@ if (isset($_GET['movie_id'])) {
             </div>
         </div>
     </div>
+    <script src="../../public/asset/js/like.js"></script>
 </body>
 </html>

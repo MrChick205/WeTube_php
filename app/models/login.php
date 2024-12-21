@@ -1,5 +1,5 @@
 <?php
-require_once 'C:\xampp\htdocs\WeTube_php\app\config\connect.php';
+require_once 'C:\xamppp\htdocs\Wetube\WeTube_php\app\config\connect.php';
 
 class LoginModel
 {
