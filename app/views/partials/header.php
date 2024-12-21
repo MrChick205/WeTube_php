@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+// Kiểm tra xem người dùng đã đăng nhập chưa
+$isLoggedIn = isset($_SESSION['user_id']); // Kiểm tra chỉ cần user_id
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,10 +51,12 @@
             font-size: 28px;
             font-weight: bold;
         }
+
         img {
             width: 70px;
             height: 70px;
         }
+
         .srch {
             display: flex;
             align-items: center;
@@ -94,23 +104,31 @@
             cursor: pointer;
             font-size: 16px;
         }
+
+        .user-icon {
+            font-size: 24px;
+        }
     </style>
 </head>
 
 <body>
     <div class="nav">
         <div class="logo"><img src="../../../public/asset/logo-wetube.png" alt=""></div>
-        <div>Home</div>
+        <div><a href="../index.php">Home</a></div>
         <div class="srch">
             <input type="text" placeholder="Search...">
             <button type="submit">
                 <i class="fa fa-search"></i>
             </button>
         </div>
-        <div>Movies</div>
+        <div><a href="../">Movies</a></div>
         <div class="auth">
-            <div>Login</div>
-            <div>Sign up</div>
+            <?php if ($isLoggedIn): ?>
+                <div id="user-icon" class="user-icon"><a href="../profile.php"><i class="fa fa-user"></i></a></div>
+            <?php else: ?>
+                <div id="login" class="auth-button"><a href="../auth/login.php">Login</a></div>
+                <div id="signup" class="auth-button"><a href="../auth/register.php">Sign up</a></div>
+            <?php endif; ?>
         </div>
     </div>
 </body>

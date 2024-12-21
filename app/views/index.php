@@ -228,7 +228,7 @@ h2 a:hover {
                                 echo "<span class='genre-tag'>" . htmlspecialchars($genre) . "</span>";
                             }
                             echo "</div>";
-                            echo "<a class='watch-button' href='watch_movie.php?movie_id=" . htmlspecialchars($movie['movie_id']) . "'>Watch movie</a>";
+                            echo "<a class='watch-button' href='watch_movie.php?movie_id=" . htmlspecialchars($movie['movie_id']) . "'>▶ Watch movie</a>";
                             echo "</div>";
                         }
                     } else {
@@ -247,11 +247,11 @@ h2 a:hover {
                 if (is_array($trendingMovies)) {
                     foreach ($trendingMovies as $movie) {
                         echo "<div class='movie'>";
-                        echo "<img src='" . htmlspecialchars($movie['poster']) . "' alt='" . htmlspecialchars($movie['title']) . "' />";
+                        echo "<a href='displayDetail.php?id=" . htmlspecialchars($movie['movie_id']) . "'><img src='" . htmlspecialchars($movie['poster']) . "' alt='" . htmlspecialchars($movie['title']) . "' /></a>";
                         echo "<div class='movie_title'>";
                         echo "<h3>" . htmlspecialchars($movie['title']) . "</h3>";
                         echo "</div>";
-                        echo "<a class='watch-button' href='watch_movie.php?movie_id=" . htmlspecialchars($movie['movie_id']) . "'>Watch movie</a>";
+                        echo "<a class='watch-button' href='watch_movie.php?movie_id=" . htmlspecialchars($movie['movie_id']) . "'>▶ Watch movie</a>";
                         echo "</div>";
                     }
                 } else {
@@ -269,11 +269,11 @@ h2 a:hover {
                 if (is_array($cartoonMovies)) {
                     foreach ($cartoonMovies as $movie) {
                         echo "<div class='movie'>";
-                        echo "<img src='" . htmlspecialchars($movie['poster']) . "' alt='" . htmlspecialchars($movie['title']) . "' />";
+                        echo "<a href='displayDetail.php?id=" . htmlspecialchars($movie['movie_id']) . "'><img src='" . htmlspecialchars($movie['poster']) . "' alt='" . htmlspecialchars($movie['title']) . "' /></a>";
                         echo "<div class='movie_title'>";
                         echo "<h3>" . htmlspecialchars($movie['title']) . "</h3>";
                         echo "</div>";
-                        echo "<a class='watch-button' href='watch_movie.php?movie_id=" . htmlspecialchars($movie['movie_id']) . "'>Watch movie</a>";
+                        echo "<a class='watch-button' href='watch_movie.php?movie_id=" . htmlspecialchars($movie['movie_id']) . "'>▶ Watch movie</a>";
                         echo "</div>";
                     }
                 } else {
@@ -291,11 +291,11 @@ h2 a:hover {
                 if (is_array($recommendedMovies)) {
                     foreach ($recommendedMovies as $movie) {
                         echo "<div class='movie'>";
-                        echo "<img src='" . htmlspecialchars($movie['poster']) . "' alt='" . htmlspecialchars($movie['title']) . "' />";
+                        echo "<a href='displayDetail.php?id=" . htmlspecialchars($movie['movie_id']) . "'><img src='" . htmlspecialchars($movie['poster']) . "' alt='" . htmlspecialchars($movie['title']) . "' /></a>";
                         echo "<div class='movie_title'>";
                         echo "<h3>" . htmlspecialchars($movie['title']) . "</h3>";
                         echo "</div>";
-                        echo "<a class='watch-button' href='watch_movie.php?movie_id=" . htmlspecialchars($movie['movie_id']) . "'>Watch movie</a>";
+                        echo "<a class='watch-button' href='watch_movie.php?movie_id=" . htmlspecialchars($movie['movie_id']) . "'>▶ Watch movie</a>";
                         echo "</div>";
                     }
                 } else {

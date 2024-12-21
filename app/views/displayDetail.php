@@ -1,16 +1,14 @@
 <?php
 require_once 'C:\xampp\htdocs\WeTube_php\app\controllers\movie.php';
 
-// // Lấy movie_id từ URL
-// if (isset($_GET['movie_id'])) {
-//     $movieId = intval($_GET['movie_id']);
-//     $movie = $moviectrll->getMovie($movieId);
-// } else {
-//     // Nếu không có movie_id, có thể chuyển hướng hoặc hiển thị thông báo
-//     die("Movie ID is required.");
-// }
-$movieId = 1;
-$movie = $moviectrll->getMovie($movieId);
+// Lấy movie_id từ URL
+if (isset($_GET['id'])) {
+    $movieId = intval($_GET['id']);
+    $movie = $moviectrll->getMovie($movieId);
+} else {
+    // Nếu không có movie_id, có thể chuyển hướng hoặc hiển thị thông báo
+    die("Movie ID is required.");
+}
 
 // Lấy danh sách phim tương tự (cùng chủ đề)
 $type_id = $movie['type_id'];
