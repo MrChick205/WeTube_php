@@ -3,7 +3,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-require_once 'C:\xamppp\htdocs\Wetube\WeTube_php\app\models\login.php';
+require_once 'C:\xampp\htdocs\WeTube_php\app\models\login.php';
 
 class LoginController
 {
