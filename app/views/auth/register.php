@@ -11,7 +11,8 @@
     <div class="container">
         <div class="signup-form">   
             <!-- Chỉnh sửa action để trỏ tới controller -->
-            <form action="../../controllers/register.php" method="POST">
+            <form action="./auth-process.php" method="POST">
+                <input type="hidden" name="action" value="register">
                 <h2>Create your Free Account</h2>
                 <div class="form">
                     <p>Full Name</p>
@@ -28,14 +29,6 @@
                 <button type="submit">Create Account</button>
             </form>
             <p class="login">Already have an account? <a href="login.php">Log in</a></p>
-            
-            <a href="login.php" class="social">
-                <button id="google">
-                    <i class="lni lni-google ggicon"></i>
-                    Sign up with Google   
-                </button>
-            </a>
-            
         </div>
     </div>
 </body>
