@@ -1,101 +1,103 @@
-        body {
-            background-color: black;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
+body {
+    background-color: black;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
 
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 60%;
-            max-width: 400px;
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            margin: 100px auto;
-        }
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    max-width: 400px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    margin: 100px auto;
+}
 
-        h1 {
-            margin-bottom: 20px;
-        }
+h1 {
+    margin-bottom: 20px;
+    color: black;
+}
 
-        .form-login {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-        }
+.form-login {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
 
-        label {
-            margin-top: 20px;
-            text-align: left;
-        }
+label {
+    margin-top: 20px;
+    text-align: left;
+    color: black;
+}
 
-        input[type="text"],
-        input[type="password"] {
-            background-color: azure;
-            width: 95%;
-            padding: 10px;
-            margin-top: 10px;
-            border: 1px solid #ccc;
-            border-radius: 20px;
-            font-size: 16px;
-        }
+input[type="email"],
+input[type="password"] {
+    background-color: azure;
+    /* Consistent background color */
+    width: 100%;
+    /* Full width for all input fields */
+    padding: 10px;
+    /* Consistent padding */
+    margin-top: 10px;
+    /* Spacing above each input */
+    border: 1px solid #ccc;
+    /* Consistent border */
+    border-radius: 20px;
+    /* Same border radius for all */
+    font-size: 16px;
+    /* Consistent font size */
+    box-sizing: border-box;
+    /* Include padding in width */
+}
 
-        input[type="submit"] {
-            background-color: yellow;
-            color: black;
-            padding: 10px 15px;
-            width: 100px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 30px;
-            align-self: center;
-            font-size: 16px;
-        }
+input[type="submit"] {
+    background-color: yellow;
+    color: black;
+    padding: 10px 15px;
+    width: 100%;
+    /* Full width for consistency */
+    border: none;
+    border-radius: 20px;
+    /* Match border radius of input fields */
+    cursor: pointer;
+    margin-top: 30px;
+    font-size: 16px;
+}
 
-        input[type="submit"]:hover {
-            background-color: rgb(188, 188, 0);
-        }
+input[type="submit"]:hover {
+    background-color: rgb(188, 188, 0);
+}
 
-        p {
-            margin-top: 20px;
-        }
+.error-message {
+    color: red;
+    /* Make error messages stand out */
+    margin-bottom: 10px;
+}
 
-        p a {
-            text-decoration: none;
-            color: yellow;
-        }
+p {
+    margin-top: 20px;
+    color: black;
+    /* Ensure text is visible */
+}
 
-        .google-button {
-            background-color: white;
-            color: black;
-            padding: 10px 20px;
-            border: 1px solid black;
-            border-radius: 30px;
-            cursor: pointer;
-            margin-top: 20px;
-            display: flex;
-            align-items: center;
-        }
+p a {
+    text-decoration: none;
+    color: yellow;
+}
 
-        .google-button img {
-            width: 20px;
-            height: 20px;
-            margin-right: 10px;
-        }
+.forgot-pw {
+    margin-top: 5px;
+    color: black;
+    text-decoration: none;
+}
 
-        .forgot-pw {
-            margin-top: 5px;
-            color: black;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
+a:hover {
+    text-decoration: underline;
+}
