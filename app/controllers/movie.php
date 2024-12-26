@@ -1,5 +1,5 @@
 <?php
-include_once '../models/movie.php';
+include_once __DIR__ . '/../models/movie.php';
 
 class MoviesController {
     private $movie; // Đối tượng Movie
@@ -74,6 +74,15 @@ class MoviesController {
             return $latest_movies;
         } else {
             return "Không có phim mới nào.";
+        }
+    }
+
+      // Hàm để xóa một bộ phim
+      public function deleteComment($comment_id, $movie_id) {
+        if ($this->movie->deleteComment($comment_id, $movie_id)) {
+            return "Xóa bình luận thành công!";
+        } else {
+            return "Xóa bình luận thất bại.";
         }
     }
 }

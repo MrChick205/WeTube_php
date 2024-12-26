@@ -1,5 +1,5 @@
 <?php
-require_once "../config/connect.php";
+require_once 'C:\xampp\htdocs\WeTube_php\app\config\connect.php';
 
 class Movie {
     private $conn;
@@ -88,6 +88,19 @@ class Movie {
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+     // Xóa một bình luận
+     public function deleteComment($comment_id, $movie_id) {
+        $query = "DELETE FROM comment WHERE comment_id = ? AND movie_id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("ii", $comment_id, $movie_id);
+    
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 ?>
