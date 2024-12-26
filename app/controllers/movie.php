@@ -1,5 +1,5 @@
 <?php
-include_once '../models/movie.php';
+include_once 'C:\xamppp\htdocs\Wetube\WeTube_php\app\models\movie.php';
 
 class MoviesController {
     private $movie; // Đối tượng Movie
@@ -80,6 +80,7 @@ class MoviesController {
 
 // Ví dụ sử dụng
 $moviectrll = new MoviesController($conn);
+$movieitems = $moviectrll->getAllMovies();
 $moviesByType = $moviectrll->getMoviesByType(2); // Lấy phim theo type_id
 $latestMovies = $moviectrll->getLatestMovies(); // Lấy 3 bộ phim mới nhất
 ?>
