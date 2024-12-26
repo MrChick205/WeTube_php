@@ -92,7 +92,7 @@ $users = $user->getAllUsers(); // Lấy danh sách người dùng
                         <td><?php echo htmlspecialchars($user['email']); ?></td>
                         <td><?php echo htmlspecialchars($user['role']); ?></td>
                         <td><?php echo htmlspecialchars($user['birth']); ?></td>
-                        <td><a href="your-link-here" class="action-button">Detail</a></td>
+                        <td><a href="user-detail.php?user_id=<?php echo htmlspecialchars($user['user_id']); ?>" class="action-button">Detail</a></td>
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>
