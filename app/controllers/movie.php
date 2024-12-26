@@ -1,5 +1,5 @@
 <?php
-include_once 'C:\xamppp\htdocs\Wetube\WeTube_php\app\models\movie.php';
+include_once __DIR__ . '/../models/movie.php';
 
 class MoviesController {
     private $movie; // Đối tượng Movie
@@ -93,6 +93,25 @@ class MoviesController {
             return $latest_movies;
         } else {
             return "Không có phim mới nào.";
+        }
+    }
+
+    //Lấy bình luận phim
+    public function getCommentsByMovie($movie_id) {
+        $comments = $this->movie->getCommentsByMovieId($movie_id);
+        if ($comments) {
+            return $comments;
+        } else {
+            return [];
+        }
+    }
+
+      // Hàm để xóa một bộ phim
+      public function deleteComment($comment_id, $movie_id) {
+        if ($this->movie->deleteComment($comment_id, $movie_id)) {
+            return "Xóa bình luận thành công!";
+        } else {
+            return "Xóa bình luận thất bại.";
         }
     }
 }
