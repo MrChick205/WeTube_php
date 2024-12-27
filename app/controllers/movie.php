@@ -1,5 +1,5 @@
 <?php
-require_once 'C:\xampp\htdocs\WeTube_php\app\models\movie.php';
+require_once 'C:\xamppp\htdocs\Wetube\WeTube_php\app\models\movie.php';
 
 class MoviesController {
     private $movie; // Đối tượng Movie
@@ -52,26 +52,12 @@ class MoviesController {
     // Hàm để xóa một bộ phim
     public function deleteMovie($movie_id) {
         if ($this->movie->deleteMovie($movie_id)) {
-            return "Xóa phim thành công!";
+            echo "<script>
+                        alert('delete successfully!');
+                        window.location.href = '../admin/movies.php';
+                    </script>";
         } else {
             return "Xóa phim thất bại.";
-        }
-
-        if (isset($_POST['movie_id'])) {
-            $movie_id = $_POST['movie_id'];
-            if (is_numeric($movie_id)) {
-                // Nếu movie_id hợp lệ, gọi phương thức deleteMovie
-                // $deleteMovies = $moviectrll->deleteMovie($movie_id);
-        
-                // Trả kết quả về cho client (browser)
-                echo $deleteMovies;
-            } else {
-                // Nếu movie_id không hợp lệ
-                echo "Invalid movie ID.";
-            }
-        } else {
-            // Nếu không có movie_id, in ra thông báo lỗi
-            echo "Movie ID is not provided.";
         }
         
     }

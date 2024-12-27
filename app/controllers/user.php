@@ -1,7 +1,7 @@
 <?php
 
-require_once 'C:\xampp\htdocs\WeTube_php\app\models\user.php'; // Bao gồm model UserModel
-require_once 'C:\xampp\htdocs\WeTube_php\vendor\sendEmail.php'; // Bao gồm lớp SendEmail nếu cần
+require_once 'C:\xamppp\htdocs\Wetube\WeTube_php\app\models\user.php'; // Bao gồm model UserModel
+require_once 'C:\xamppp\htdocs\Wetube\WeTube_php\vendor\sendEmail.php'; // Bao gồm lớp SendEmail nếu cần
 
 class UserController {
     private $userModel;

@@ -1,5 +1,5 @@
 <?php
-require_once 'C:\xampp\htdocs\WeTube_php\app\controllers\user.php';
+require_once 'C:\xamppp\htdocs\Wetube\WeTube_php\app\controllers\user.php';
 
 // Initialize the user controller
 $Userctrll = new UserController($conn); // Make sure to replace UserController with the correct class name
@@ -92,8 +92,8 @@ if (isset($_GET['user_id'])) {
             <div class="recent-images">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYxnnMqQyMqz_sWOc-HIaB8QJu9ZeGd0ijnA&s" alt="Recent item">
                 <img src="https://m.media-amazon.com/images/I/61RhWaYBp7L._AC_UF894,1000_QL80_.jpg" alt="Recent item">
-                <img src="https://via.placeholder.com/60x90" alt="Recent item">
-                <img src="https://via.placeholder.com/60x90" alt="Recent item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN-31qQugbrPeoBQKjJuXDURsAztkATje7BQ&s" alt="Recent item">
+                <img src="https://m.media-amazon.com/images/I/71lADxngTWS._AC_SL1050_.jpg" alt="Recent item">
             </div>
         </div>
         <button class="delete-btn">Delete user</button>

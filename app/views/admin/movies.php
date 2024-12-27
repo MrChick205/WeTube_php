@@ -1,5 +1,15 @@
 <?php 
-    require_once('C:\xampp\htdocs\WeTube_php\app\controllers\movie.php');
+    require_once('C:\xamppp\htdocs\Wetube\WeTube_php\app\controllers\movie.php');
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($_POST['add'])) {
+            $moviectrll->addMovie($_POST['title'], $_POST['description'], $_POST['movie_url'], $_POST['type_id'], $_POST['poster']);
+        } elseif (isset($_POST['update'])) {
+            $moviectrll->updateMovie($_POST['movie_id'], $_POST['title'], $_POST['description'], $_POST['movie_url'], $_POST['type_id'], $_POST['poster']);
+        } elseif (isset($_POST['delete'])) {
+            $moviectrll->deleteMovie($_POST['movie_id']);
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +23,117 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     
 </head>
+<style>
+    body {
+    background-color: black;
+}
 
+.main-content {
+    padding: 30px 50px;
+}
+
+.add-btn {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* CSS cho table */
+.table {
+    table-layout: fixed;
+    width: 100%;
+    border: 2px solid black;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;    
+    vertical-align: middle;
+    padding: 10px;
+}
+
+#movieTable th:nth-child(5), #movieTable td:nth-child(5) {
+    text-align: left;   
+    vertical-align: top;  
+    white-space: normal;  
+    word-wrap: break-word; 
+}
+
+#movieTable th:nth-child(3), #movieTable td:nth-child(3) {
+    white-space: normal;  
+    word-wrap: break-word;
+}
+
+#movieTable th:nth-child(2), #movieTable td:nth-child(2) {
+    width: 200px;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+#movieTable th:nth-child(6), #movieTable td:nth-child(6) {
+    width: 130px;
+    white-space: normal; 
+    word-wrap: break-word;
+}
+
+#movieTable th:nth-child(1), #movieTable td:nth-child(1) {
+    width: 40px;
+}
+
+#movieTable th:nth-child(2), #movieTable td:nth-child(2) {
+    width: 200px;
+}
+
+#movieTable th:nth-child(3), #movieTable td:nth-child(3) {
+    width: 250px;
+}
+
+#movieTable th:nth-child(4), #movieTable td:nth-child(4) {
+    width: 200px;
+}
+
+#movieTable th:nth-child(5), #movieTable td:nth-child(5) {
+    width: 300px;
+}
+
+#movieTable th:nth-child(6), #movieTable td:nth-child(6) {
+    width: 130px;
+}
+
+/* #movieTable th:nth-child(7), #movieTable td:nth-child(7) {
+    width: 150px;
+} */
+
+.btn_ud button {
+    display: block;
+    margin-bottom: 10px;
+    width: 100px;
+}
+
+.img-thumbnail {
+    height: 100px;
+}
+
+.text-center {
+    color: white;
+}
+
+.btn-form button, input, a{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 8px;
+    width: 80px;
+    margin-left: 30px;
+    align-items: center;
+}
+</style>
 <body>
     <div class="main-content">
         <div id="movieManagement" class="hidden">
@@ -26,7 +146,6 @@
             <th>Title</th>
             <th>Movie URL</th>
             <th>Poster</th>
-            <th>Description</th>
             <th>Create_at</th>
             <th>Action</th>
         </tr>
@@ -42,14 +161,15 @@
                                 <td>{$movieitem['title']}</td>
                                 <td>{$movieitem['movie_url']}</td>
                                 <td><img src='{$movieitem['poster']}' class='img-thumbnail' alt='Image of {$movieitem['title']}'></td>
-                                <td>{$movieitem['description']}</td>
                                 <td>{$movieitem['created_at']}</td>
                                 <td>
-                                        <form action='movie.php' method='POST' style='display:inline;' class='btn-form'>
-                                            <button type='button' class='btn btn-warning'>Update</button>
-                                            <button type='submit' class='btn btn-danger'>Delete</button>
+                                        <form method='POST' style='display:inline;' class='btn-form'>
+                                            <input type='hidden' name='movie_id' value='{$movieitem['movie_id']}'>
+                                            <button type='submit' name='update' class='btn btn-warning'>Update</button>
+                                            <input type='submit' name='delete' class='btn btn-danger' value='Delete'>
                                             <a href='movie-detail.php?movie_id={$movieitem['movie_id']}' class='btn btn-danger'>Detail</a>
                                         </form>
+
                                 </td>
                             </tr>
                         ";
