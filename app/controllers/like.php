@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('C:\xampp\htdocs\WeTube_php\app\models\like.php');
+require_once('C:\xamppp\htdocs\Wetube\WeTube_php\app\models\like.php');
 
 class LikeController {
     private $likeModel;

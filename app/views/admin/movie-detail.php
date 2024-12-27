@@ -7,7 +7,7 @@ require_once __DIR__ . '/../../controllers/like.php';
 if (isset($_GET['movie_id'])) {
     $movieId = intval($_GET['movie_id']);
     $movie = $moviectrll->getMovie($movieId);
-    $comments = $moviectrll->getCommentsByMovie($movieId); // Lấy danh sách bình luận
+    $comments = $moviectrll->getCommentsByMovie($movieId); 
 } else {
     die("Movie ID is required.");
 }
@@ -16,7 +16,7 @@ if (isset($_GET['movie_id'])) {
 if (isset($_GET['delete_comment_id']) && isset($_GET['movie_id'])) {
     $commentId = intval($_GET['delete_comment_id']);
     $movieId = intval($_GET['movie_id']);
-    echo "Comment ID: $commentId, Movie ID: $movieId"; // Thêm dòng này để kiểm tra giá trị
+    echo "Comment ID: $commentId, Movie ID: $movieId";
     $result = $moviectrll->deleteComment($commentId, $movieId);
     // Kiểm tra kết quả
     if ($result) {
@@ -93,9 +93,6 @@ if (isset($_GET['delete_comment_id']) && isset($_GET['movie_id'])) {
                     <div class="num_heart">
                         <p><?php echo $likeCount; ?></p>
                     </div>
-                    <div class="collection_icon">
-                        <button type="submit" name="collection"><i class="fa fa-bookmark-o"></i></button>
-                    </div> 
                 </form>   
             </div>
         </div>
