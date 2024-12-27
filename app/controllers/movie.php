@@ -3,6 +3,7 @@ require_once 'C:\xampp\htdocs\WeTube_php\app\models\movie.php';
 
 class MoviesController {
     private $movie; // Đối tượng Movie
+    // private $movie_id;
 
     // Constructor nhận vào đối tượng kết nối cơ sở dữ liệu
     public function __construct($conn) {
@@ -55,6 +56,24 @@ class MoviesController {
         } else {
             return "Xóa phim thất bại.";
         }
+
+        if (isset($_POST['movie_id'])) {
+            $movie_id = $_POST['movie_id'];
+            if (is_numeric($movie_id)) {
+                // Nếu movie_id hợp lệ, gọi phương thức deleteMovie
+                // $deleteMovies = $moviectrll->deleteMovie($movie_id);
+        
+                // Trả kết quả về cho client (browser)
+                echo $deleteMovies;
+            } else {
+                // Nếu movie_id không hợp lệ
+                echo "Invalid movie ID.";
+            }
+        } else {
+            // Nếu không có movie_id, in ra thông báo lỗi
+            echo "Movie ID is not provided.";
+        }
+        
     }
 
     // Hàm để lấy tất cả phim theo type_id
@@ -100,6 +119,5 @@ class MoviesController {
 // Ví dụ sử dụng
 $moviectrll = new MoviesController($conn);
 $movieitems = $moviectrll->getAllMovies();
-$moviesByType = $moviectrll->getMoviesByType(2); // Lấy phim theo type_id
-$latestMovies = $moviectrll->getLatestMovies(); // Lấy 3 bộ phim mới nhất
+$latestMovies = $moviectrll->getLatestMovies(); 
 ?>
