@@ -1,5 +1,5 @@
 <?php
-require_once('../config/connect.php');
+require_once('C:\xampp\htdocs\WeTube_php\app\config\connect.php');
 
 class LikeModel {
     private $conn;
