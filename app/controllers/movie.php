@@ -77,6 +77,16 @@ class MoviesController {
         }
     }
 
+    //Lấy bình luận phim
+    public function getCommentsByMovie($movie_id) {
+        $comments = $this->movie->getCommentsByMovieId($movie_id);
+        if ($comments) {
+            return $comments;
+        } else {
+            return [];
+        }
+    }
+
       // Hàm để xóa một bộ phim
       public function deleteComment($comment_id, $movie_id) {
         if ($this->movie->deleteComment($comment_id, $movie_id)) {
@@ -89,6 +99,7 @@ class MoviesController {
 
 // Ví dụ sử dụng
 $moviectrll = new MoviesController($conn);
+$movieitems = $moviectrll->getAllMovies();
 $moviesByType = $moviectrll->getMoviesByType(2); // Lấy phim theo type_id
 $latestMovies = $moviectrll->getLatestMovies(); // Lấy 3 bộ phim mới nhất
 ?>
