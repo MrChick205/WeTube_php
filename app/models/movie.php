@@ -89,5 +89,44 @@ class Movie {
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    // Lấy danh sách bình luận theo movie_id
+    public function getCommentsByMovieId($movie_id) {
+        $query = "SELECT c.comment_id, c.content, u.user_name, u.image FROM comment c
+        INNER JOIN users u ON c.user_id = u.user_id WHERE movie_id = ?
+        ORDER BY c.created_at DESC";  
+         $stmt = $this->conn->prepare($query);
+         if ($stmt === false) {
+             die('MySQL prepare error: ' . $this->conn->error);
+         }
+     
+         $stmt->bind_param("i", $movie_id);  
+         $stmt->execute();  
+     
+         // Lấy kết quả và kiểm tra có dữ liệu không
+         $result = $stmt->get_result();
+         if ($result->num_rows > 0) {
+             return $result->fetch_all(MYSQLI_ASSOC);  
+         } else {
+             return []; 
+         }
+    }
+    
+     // Xóa một bình luận
+     public function deleteComment($comment_id, $movie_id) {
+        $query = "DELETE FROM comment WHERE comment_id = ? AND movie_id = ?";
+        $stmt = $this->conn->prepare($query);
+    
+        if ($stmt === false) {
+            die('MySQL prepare error: ' . $this->conn->error); // Thêm kiểm tra lỗi SQL
+        }
+        $stmt->bind_param("ii", $comment_id, $movie_id);
+        if ($stmt->execute()) {
+            return true; // Trả về true nếu xóa thành công
+        } else {
+            // In ra lỗi nếu không xóa được
+            die("Error executing delete: " . $stmt->error);
+        }
+    }
 }
 ?>

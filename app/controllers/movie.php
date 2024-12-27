@@ -76,6 +76,25 @@ class MoviesController {
             return "Không có phim mới nào.";
         }
     }
+
+    //Lấy bình luận phim
+    public function getCommentsByMovie($movie_id) {
+        $comments = $this->movie->getCommentsByMovieId($movie_id);
+        if ($comments) {
+            return $comments;
+        } else {
+            return [];
+        }
+    }
+
+      // Hàm để xóa một bộ phim
+      public function deleteComment($comment_id, $movie_id) {
+        if ($this->movie->deleteComment($comment_id, $movie_id)) {
+            return "Xóa bình luận thành công!";
+        } else {
+            return "Xóa bình luận thất bại.";
+        }
+    }
 }
 
 // Ví dụ sử dụng
